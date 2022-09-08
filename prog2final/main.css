@@ -1,0 +1,18 @@
+canvas {
+    display: block;
+    margin: 0 auto;
+}
+
+div {
+    display: inline-block;
+}
+
+h1 {
+    padding: 20px;
+    text-align: center;
+}
+
+body {
+    font-family: 'Noto Sans', sans-serif !important;
+    background-image: linear-gradient(to right bottom,#00FF00,#56FF00,#91FF00,#B2FF00,#D0FF00,#FFFF00);
+}
