@@ -19,7 +19,7 @@ body {
     background-image: linear-gradient(to right bottom,#00FF00,#56FF00,#91FF00,#B2FF00,#D0FF00,#FFFF00);
 }
 tr{
-    opacity: 0.3;
+    opacity: 0.5;
 }
 tr:hover{
     opacity: 1;
