@@ -1,4 +1,4 @@
-class Pahapan{
+class Pahapan extends LivingCreature{
     constructor(x, y) {
         this.x = x;
         this.y = y;

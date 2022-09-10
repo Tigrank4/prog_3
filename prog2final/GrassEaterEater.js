@@ -1,4 +1,4 @@
-class GrassEaterEater {
+class GrassEaterEater extends LivingCreature {
     constructor(x, y) {
         this.x = x;
         this.y = y;
