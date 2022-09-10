@@ -6,10 +6,10 @@ var tuynutarax = [];
 var pahapan = [];
 var side = 20;
 function setup() {
-    function matrixGenerator(matrixSize, grassCount, grassEaterCount, grassEaterEaterCount,pahapanCount,tuynutaraxCount){
+    function matrixGenerator(matrixSize, grassCount, grassEaterCount, grassEaterEaterCount, pahapanCount, tuynutaraxCount) {
         for (let i = 0; i < matrixSize; i++) {
             matrix[i] = []
-            for (let o = 0; o < matrixSize; o++) { 
+            for (let o = 0; o < matrixSize; o++) {
                 matrix[i][o] = 0;
             }
         }
@@ -30,41 +30,41 @@ function setup() {
         }
         for (let i = 0; i < tuynutaraxCount; i++) {
             let x = Math.floor(random(matrixSize));
-           let y = Math.floor(random(matrixSize));
-       matrix[y][x] = 4;
+            let y = Math.floor(random(matrixSize));
+            matrix[y][x] = 4;
         }
         for (let i = 0; i < pahapanCount; i++) {
             let x = Math.floor(random(matrixSize));
-           let y = Math.floor(random(matrixSize));
-       matrix[y][x] = 5;
+            let y = Math.floor(random(matrixSize));
+            matrix[y][x] = 5;
         }
     }
     matrixGenerator(20, 50, 5, 5, 1, 1)
-    
+
     frameRate(3);
     createCanvas(matrix[0].length * side, matrix.length * side);
     background('#acacac');
 
     for (let y = 0; y < matrix.length; y++) {
         for (let x = 0; x < matrix[y].length; x++) {
-            
-            if (matrix[y][x] == 1){
+
+            if (matrix[y][x] == 1) {
                 let gr = new Grass(x, y);
                 grassArr.push(gr);
             }
-            else if (matrix[y][x] == 2){
+            else if (matrix[y][x] == 2) {
                 let eater = new GrassEater(x, y);
                 grassEaterArr.push(eater);
             }
-            else if (matrix[y][x] == 3){
+            else if (matrix[y][x] == 3) {
                 let eatergr = new GrassEaterEater(x, y);
                 grassEaterEaterArr.push(eatergr);
             }
-            else if (matrix[y][x] == 4){
+            else if (matrix[y][x] == 4) {
                 let egr = new TuynuTarax(x, y);
                 tuynutarax.push(egr);
-           }
-            else if (matrix[y][x] == 5){
+            }
+            else if (matrix[y][x] == 5) {
                 let eggr = new Pahapan(x, y);
                 pahapan.push(eggr);
             }
@@ -89,10 +89,10 @@ function draw() {
             else if (matrix[y][x] == 3) {
                 fill("red");
             }
-            else if(matrix[y][x] == 4){
+            else if (matrix[y][x] == 4) {
                 fill("orange");
             }
-            else if(matrix[y][x] == 5){
+            else if (matrix[y][x] == 5) {
                 fill("blue");
             }
             rect(x * side, y * side, side, side);
@@ -119,5 +119,5 @@ function draw() {
     for (let i = 0; i < tuynutarax.length; i++) {
         const grasss = tuynutarax[i];
         grasss.eat()
-   }
-  }
+    }
+}
