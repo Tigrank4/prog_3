@@ -1,49 +1,17 @@
 class GrassEater extends LivingCreature {
     constructor(x, y) {
+        super(x, y)
         super.x = x;
         super.y = y;
         this.energy = 20;
-        this.directions = [
-            [this.x - 1, this.y - 1],
-            [this.x, this.y - 1],
-            [this.x + 1, this.y - 1],
-            [this.x - 1, this.y],
-            [this.x + 1, this.y],
-            [this.x - 1, this.y + 1],
-            [this.x, this.y + 1],
-            [this.x + 1, this.y + 1]
-        ];
     }
-    getNewCordinates(){
-              this.directions = [
-            [this.x - 1, this.y - 1],
-            [this.x, this.y - 1],
-            [this.x + 1, this.y - 1],
-            [this.x - 1, this.y],
-            [this.x + 1, this.y],
-            [this.x - 1, this.y + 1],
-            [this.x, this.y + 1],
-            [this.x + 1, this.y + 1]
-        ];
-    }
-    chooseCell(char,char2) {
-      this.getNewCordinates();
-        let result = [];
+    chooseCell(char) {
+      this.getNewCoordinates();
+      return super.chooseCell(char);
+     }
 
-        for (let i = 0; i < this.directions.length; i++) {
-            let x = this.directions[i][0];
-            let y = this.directions[i][1];
-
-            if ( y < matrix.length && y >= 0 && x < matrix[0].length && x >= 0 ){
-                if (matrix[y][x] == char||matrix[y][x] == char2) {
-                    result.push(this.directions[i]);
-                }
-            }
-
-        }
-
-        return result;
-    }
+       
+    
     mul() {
         let found = this.chooseCell(0);
         let exact = random(found)
