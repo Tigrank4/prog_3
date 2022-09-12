@@ -1,4 +1,4 @@
-class TuynuTarax extends LivingCreature{
+  class TuynuTarax extends LivingCreature{
     constructor(x, y) {
         super.x = x;
         super.y = y;
