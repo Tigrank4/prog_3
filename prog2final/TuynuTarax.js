@@ -3,14 +3,12 @@ class TuynuTarax extends LivingCreature{
         super(x, y);
          this.energy = 20;
      }
-    
-     chooseCell(char){
-         this.getNewCoordinates();
-         return super.chooseCell(character);    
-       }
-  
+    //  chooseCell(char){
+    //     this.getNewCoordinates();
+    //     return super.chooseCell(char);    
+    //   }
     eat(){
-        let found = this.chooseCell(5,3,2,1);
+        let found =super.chooseCell(5,3,2,1);
         let exact = random(found)
 
         if (exact){
@@ -52,7 +50,7 @@ class TuynuTarax extends LivingCreature{
         }
     }
     move(){
-        let found = this.chooseCell(0);
+        let found =super.chooseCell(0);
         let exact = random(found)
 
         if (exact){
@@ -67,9 +65,7 @@ class TuynuTarax extends LivingCreature{
 
             this.energy--
 
-            if(this.energy < 0){
-                this.die()
-            }
+           
         }else {
             this.energy--
             

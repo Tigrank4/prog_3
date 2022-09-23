@@ -3,13 +3,13 @@ class GrassEaterEater extends LivingCreature {
         super(x, y);
         this.energy = 20;
     }
-    chooseCell(char){
-          this.getNewCoordinates();
-        return super.chooseCell(character);
-      }
+    // chooseCell(char){
+    //       this.getNewCoordinates();
+    //     return super.chooseCell(char);
+    //   }
       
       mul() {
-        let found = this.chooseCell(0);
+        let found =super.chooseCell(0);
         let exact = random(found)
 
         if (exact && this.energy > 8) {
@@ -26,7 +26,7 @@ class GrassEaterEater extends LivingCreature {
         }
     }
     eat(){
-        let found = this.chooseCell(1,2,4);
+        let found =super.chooseCell(1,2,4);
         let exact = random(found)
 
         if (exact){
@@ -60,7 +60,7 @@ class GrassEaterEater extends LivingCreature {
         }
     }
     move(){
-        let found = this.chooseCell(0);
+        let found =super.chooseCell(0);
         let exact = random(found)
 
         if (exact){

@@ -4,13 +4,13 @@ class Pahapan extends LivingCreature{
         this.energy = 20;
     }
    
-    chooseCell(char){
-        this.getNewCoordinates();
-        return super.chooseCell(character);    
-      }
+    // chooseCell(char){
+    //     this.getNewCoordinates();
+    //     return super.chooseCell(char);    
+    //   }
   
     eat(){
-        let found = this.chooseCell(3,2);
+        let found =super.chooseCell(3,2);
         let exact = random(found)
 
         if (exact){
@@ -41,7 +41,7 @@ class Pahapan extends LivingCreature{
         }
     }
     move(){
-        let found = this.chooseCell(0);
+        let found =super.chooseCell(0);
         let exact = random(found)
 
         if (exact){
