@@ -5,12 +5,12 @@ module.exports = class TuynuTarax extends LivingCreature{
         super(x, y);
          this.energy = 20;
      }
-    //  chooseCell(char){
-    //     this.getNewCoordinates();
-    //     return super.chooseCell(char);    
-    //   }
+     chooseCell(char,char1,char2,char3){
+        super.getNewDirections();
+        return super.chooseCell(char,char1,char2,char3);    
+      }
     eat(){
-        let found =super.chooseCell(5,3,2,1);
+        let found =this.chooseCell(5,3,2,1);
         let exact = found[Math.floor(Math.random() * found.length)]
 
         if (exact){
@@ -52,7 +52,7 @@ module.exports = class TuynuTarax extends LivingCreature{
         }
     }
     move(){
-        let found =super.chooseCell(0);
+        let found =this.chooseCell(0);
         let exact = found[Math.floor(Math.random() * found.length)]
 
         if (exact){

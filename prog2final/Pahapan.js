@@ -6,13 +6,13 @@ module.exports = class Pahapan extends LivingCreature{
         this.energy = 20;
     }
    
-    // chooseCell(char){
-    //     this.getNewCoordinates();
-    //     return super.chooseCell(char);    
-    //   }
+    chooseCell(char,char1){
+        super.getNewDirections();
+        return super.chooseCell(char,char1);    
+      }
   
     eat(){
-        let found =super.chooseCell(3,2);
+        let found =this.chooseCell(3,2);
         let exact = found[Math.floor(Math.random() * found.length)]
 
         if (exact){
@@ -43,7 +43,7 @@ module.exports = class Pahapan extends LivingCreature{
         }
     }
     move(){
-        let found =super.chooseCell(0);
+        let found =this.chooseCell(0);
         let exact = found[Math.floor(Math.random() * found.length)]
 
         if (exact){
