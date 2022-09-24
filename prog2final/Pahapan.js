@@ -56,13 +56,14 @@ module.exports = class Pahapan extends LivingCreature{
             this.x = x;
             this.y = y;
 
-            this.energy--
+            this.energy -= 3;
 
-            if(this.energy < 0){
+
+            if(this.energy <= 0){
                 this.die()
             }
         }else {
-            this.energy--
+            this.energy -= 3;
             
             }
         

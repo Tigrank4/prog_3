@@ -2,8 +2,8 @@ let LivingCreature = require('./LivingCreature')
 
 module.exports = class Grass extends LivingCreature {
 
-    constructor(x, y, index) {
-        super(x, y, index);
+    constructor(x, y) {
+        super(x, y);
 
         this.directions = [
             [this.x - 1, this.y - 1],
@@ -20,7 +20,7 @@ module.exports = class Grass extends LivingCreature {
 
 
     mul() {
-        this.energy++;
+        this.energy += 3;
         let emptyCells = super.chooseCell(0)
         let newCell = emptyCells[Math.floor(Math.random() * emptyCells.length)]
         if (this.energy >= 8 && newCell) {

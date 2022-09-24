@@ -3,7 +3,7 @@ module.exports = class LivingCreature {
     constructor(x, y) {
         this.x = x;
         this.y = y;
-        this.energy = 8;
+        this.energy = 0;
     }
  
     getNewDirections() {

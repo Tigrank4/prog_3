@@ -59,22 +59,22 @@ module.exports = class TuynuTarax extends LivingCreature{
             let x = exact[0];
             let y = exact[1];
 
-            matrix[y][x] = 4
+            matrix[y][x] = 5
             matrix[this.y][this.x] = 0
 
             this.x = x;
             this.y = y;
 
-            this.energy--
+            this.energy -= 3;
 
-           
+
+            
         }else {
-            this.energy--
+            this.energy -= 3;
             
             }
         
     }
-
 
 
 

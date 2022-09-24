@@ -4,6 +4,7 @@ var server = require('http').Server(app);
 var io = require('socket.io')(server);
 var fs = require("fs");
 
+
 app.use(express.static("."));
 
 app.get('/', function (req, res) {
@@ -31,8 +32,8 @@ pahapan = [];
 Grass = require("./Grass")
 GrassEater = require("./GrassEater")
 GrassEaterEater = require("./GrassEaterEater")
-Pahapan = require("./Pahapan")
 TuynuTarax = require("./TuynuTarax")
+ Pahapan = require("./Pahapan")
 
 function matrixGenerator(matrixSize, grassCount, grassEaterCount, grassEaterEaterCount, pahapanCount, tuynutaraxCount) {
     
@@ -79,28 +80,38 @@ io.sockets.emit('send matrix', matrix)
 
 function createObject(matrix) {
 
-    for (let y = 0; y < matrix.length; y++) {
-        for (let x = 0; x < matrix[y].length; x++) {
-    
+    for (var y = 0; y < matrix.length; y++) {
+        for (var x = 0; x < matrix[y].length; x++) {
             if (matrix[y][x] == 1) {
+                matrix[y][x] = 1;
                 let gr = new Grass(x, y);
                 grassArr.push(gr);
             }
             else if (matrix[y][x] == 2) {
-                let eater = new GrassEater(x, y);
-                grassEaterArr.push(eater);
+                matrix[y][x] = 2;
+                let great = new GrassEater(x, y);
+                grassEaterArr.push(great);
             }
             else if (matrix[y][x] == 3) {
-                let eatergr = new GrassEaterEater(x, y);
-                grassEaterEaterArr.push(eatergr);
+                matrix[y][x] == 3
+                let greateat = new GrassEaterEater(x, y);
+                grassEaterEaterArr.push(greateat);
             }
             else if (matrix[y][x] == 4) {
-                let egr = new TuynuTarax(x, y);
-                tuynutarax.push(egr);
+                if (tuynutarax.length == 0) {
+                
+                let tr = new TuynuTarax(x, y);
+                tuynutarax.push(tr);
             }
+                }
+               
             else if (matrix[y][x] == 5) {
-                let eggr = new Pahapan(x, y);
-                pahapan.push(eggr);
+                if (pahapan.length == 0) {
+                  
+                let trer = new Pahapan(x, y);
+                pahapan.push(trer); 
+                }
+                
             }
         }
     }
@@ -113,24 +124,26 @@ function createObject(matrix) {
 
 function game(){
     
-    for (let i = 0; i < grassArr.length; i++) {
+    for (let i in grassArr) {
+      
         grassArr[i].mul();
+        
+       
     }
-    for (let i = 0; i < grassEaterArr.length; i++) {
-        const eater = grassEaterArr[i];
-        eater.eat();
+    for (let i in grassEaterArr) 
+        grassEaterArr[i].eat();
+    
+    for (let i in grassEaterEaterArr) 
+        grassEaterEaterArr[i].eat();
+    
+    for (let i in tuynutarax) {
+        tuynutarax[i].eat();
+       
     }
-    for (let i = 0; i < grassEaterEaterArr.length; i++) {
-        const eaterr = grassEaterEaterArr[i];
-        eaterr.eat();
-    }
-    for (let i = 0; i < pahapan.length; i++) {
-        const eaterrr = pahapan[i];
-        eaterrr.eat();
-    }
-    for (let i = 0; i < tuynutarax.length; i++) {
-        const grasss = tuynutarax[i];
-        grasss.move()
+    for (let i in pahapan) {
+       
+        pahapan[i].eat();
+        
     }
     io.sockets.emit("send matrix", matrix);
 }
