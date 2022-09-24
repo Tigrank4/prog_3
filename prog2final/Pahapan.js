@@ -1,4 +1,6 @@
-class Pahapan extends LivingCreature{
+let LivingCreature = require('./LivingCreature')
+
+module.exports = class Pahapan extends LivingCreature{
     constructor(x, y) {
        super(x, y);
         this.energy = 20;
@@ -11,7 +13,7 @@ class Pahapan extends LivingCreature{
   
     eat(){
         let found =super.chooseCell(3,2);
-        let exact = random(found)
+        let exact = found[Math.floor(Math.random() * found.length)]
 
         if (exact){
             this.energy +=5;
@@ -42,7 +44,7 @@ class Pahapan extends LivingCreature{
     }
     move(){
         let found =super.chooseCell(0);
-        let exact = random(found)
+        let exact = found[Math.floor(Math.random() * found.length)]
 
         if (exact){
             let x = exact[0];

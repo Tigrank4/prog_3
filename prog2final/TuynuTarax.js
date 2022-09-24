@@ -1,4 +1,6 @@
-class TuynuTarax extends LivingCreature{
+let LivingCreature = require('./LivingCreature')
+
+module.exports = class TuynuTarax extends LivingCreature{
     constructor(x, y) {
         super(x, y);
          this.energy = 20;
@@ -9,7 +11,7 @@ class TuynuTarax extends LivingCreature{
     //   }
     eat(){
         let found =super.chooseCell(5,3,2,1);
-        let exact = random(found)
+        let exact = found[Math.floor(Math.random() * found.length)]
 
         if (exact){
             this.energy +=5;
@@ -51,7 +53,7 @@ class TuynuTarax extends LivingCreature{
     }
     move(){
         let found =super.chooseCell(0);
-        let exact = random(found)
+        let exact = found[Math.floor(Math.random() * found.length)]
 
         if (exact){
             let x = exact[0];
