@@ -20,7 +20,7 @@ module.exports = class Grass extends LivingCreature {
 
 
     mul() {
-        this.energy += 3;
+        this.energy += 2;
         let emptyCells = super.chooseCell(0)
         let newCell = emptyCells[Math.floor(Math.random() * emptyCells.length)]
         if (this.energy >= 8 && newCell) {

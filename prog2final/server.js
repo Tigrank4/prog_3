@@ -18,9 +18,7 @@ server.listen(PORT, () => {
 //Math.floor(Math.random() * matrixSize)
 //
 
-function rand(min) {
-    return Math.random() * min;
-}
+
 grassArr = [];
 grassEaterArr = []; 
 grassEaterEaterArr = [];
@@ -97,19 +95,20 @@ function createObject(matrix) {
                 let greateat = new GrassEaterEater(x, y);
                 grassEaterEaterArr.push(greateat);
             }
-            else if (matrix[y][x] == 4) {
-                if (tuynutarax.length == 0) {
-                
-                let tr = new TuynuTarax(x, y);
+
+        if (tuynutarax.length == 0) {
+             if (matrix[y][x] == 4) {
+                 let tr = new TuynuTarax(x, y);
                 tuynutarax.push(tr);
+                
             }
                 }
-               
-            else if (matrix[y][x] == 5) {
-                if (pahapan.length == 0) {
-                  
+           if (pahapan.length == 0) {    
+             if (matrix[y][x] == 5) {
                 let trer = new Pahapan(x, y);
                 pahapan.push(trer); 
+                  
+                
                 }
                 
             }

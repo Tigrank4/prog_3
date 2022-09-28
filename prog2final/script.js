@@ -8,7 +8,7 @@ function setup() {
    
 
     frameRate(3);
-    createCanvas(50 * side, 50 * side);
+    createCanvas(20 * side, 20 * side);
     background('#acacac');
 }
 

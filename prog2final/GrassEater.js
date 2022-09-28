@@ -9,15 +9,10 @@ module.exports = class GrassEater extends LivingCreature {
         super.y = y;
         this.energy = 20;
     }
-     chooseCell(char,char1) {
-       super.getNewDirections();
-      return super.chooseCell(char,char1);
-     }
 
-       
-    
+
     mul() {
-        let found =this.chooseCell(0);
+        let found =super.chooseCell(0);
         let exact = found[Math.floor(Math.random() * found.length)]
 
         if (exact && this.energy > 8) {
@@ -34,7 +29,7 @@ module.exports = class GrassEater extends LivingCreature {
         }
     }
     eat(){
-        let found =this.chooseCell(1);
+        let found =super.chooseCell(1);
         let exact = found[Math.floor(Math.random() * found.length)]
 
         if (exact){
