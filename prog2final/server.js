@@ -3,18 +3,19 @@ var app = express();
 var server = require('http').Server(app);
 var io = require('socket.io')(server);
 var fs = require("fs");
+ 
 
 
 app.use(express.static("."));
 
+app.get('/', function (req, res) {
+    res.redirect('index.html');
+});
 
 app.get('/start', function (req, res) {
     res.redirect('start.html');
 });
 
-app.get('/', function (req, res) {
-    res.redirect('index.html');
-});
 
 const PORT = 3000;
 server.listen(PORT, () => {
@@ -30,7 +31,11 @@ grassEaterArr = [];
 grassEaterEaterArr = [];
 tuynutarax = [];
 pahapan = [];
+points = [];
+iam = [];
  matrix = [];
+
+
 
 weath = "winter";
 Grass = require("./Grass")
@@ -38,8 +43,11 @@ GrassEater = require("./GrassEater")
 GrassEaterEater = require("./GrassEaterEater")
 TuynuTarax = require("./TuynuTarax")
  Pahapan = require("./Pahapan")
+ Points = require("./Points")
+ Iam = require('./Iam');
 
-function matrixGenerator(matrixSize, grassCount, grassEaterCount, grassEaterEaterCount, pahapanCount, tuynutaraxCount) {
+
+function matrixGenerator(matrixSize, grassCount, grassEaterCount, grassEaterEaterCount, pahapanCount, tuynutaraxCount,pointsCount,iamCount) {
     
 
     for (let i = 0; i < matrixSize; i++) {
@@ -73,8 +81,18 @@ function matrixGenerator(matrixSize, grassCount, grassEaterCount, grassEaterEate
         let y = Math.floor(Math.random() * matrixSize);
         matrix[y][x] = 5;
     }
+    for (let i = 0; i < pointsCount; i++) {
+        let x = Math.floor(Math.random() * matrixSize);
+        let y = Math.floor(Math.random() * matrixSize);
+        matrix[y][x] = 6;
+    }
+    for (let i = 0; i < iamCount; i++) {
+        let x = Math.floor(Math.random() * matrixSize);
+        let y = Math.floor(Math.random() * matrixSize);
+        matrix[y][x] = 7;
+    }
 }
- matrixGenerator(20, 50, 15, 15, 1, 1)
+ matrixGenerator(20, 50, 15, 15, 1, 1,20,15,1)
 
 
 io.sockets.emit('send matrix', matrix)
@@ -110,6 +128,12 @@ function createObject(matrix) {
              else if (matrix[y][x] == 5) {  
                 pahapan.push(new Pahapan(x, y)); 
             }
+            else if (matrix[y][x] == 6) {  
+                points.push(new Points(x, y)); 
+            }
+            else if (matrix[y][x] == 7) {  
+                iam.push(new Iam(x, y)); 
+            }
         }
     }
  
@@ -142,6 +166,12 @@ function game(){
         pahapan[i].eat();
         
     }
+    for (let i in points) {
+       
+        points[i].mul();
+        
+    }
+    
     io.sockets.emit("send matrix", matrix);
 }
 
@@ -149,10 +179,20 @@ setInterval(game, 1000)
 
 function kill() {
     grassArr = [];
-    grassEaterArr = []
+    grassEaterArr = [];
+    grassEaterEaterArr = [];
+    pahapan = [];
+    tuynutarax = [];
+    points = [];
+   
+
     for (var y = 0; y < matrix.length; y++) {
         for (var x = 0; x < matrix[y].length; x++) {
-            matrix[y][x] = 0;
+            if (matrix[y][x] != 6) {
+                
+                 matrix[y][x] = 0;
+                
+            }
         }
     }
     io.sockets.emit("send matrix", matrix);
@@ -195,6 +235,33 @@ function addGrassEaterEater() {
     io.sockets.emit("send matrix", matrix);
 }
 
+function DeletePahapan() {
+    pahapan = []
+
+    for (var y = 0; y < matrix.length; y++) {
+        for (var x = 0; x < matrix[y].length; x++) {
+            if(matrix[y][x] == 5){
+            matrix[y][x] = 0;
+            }
+        }
+    }
+
+    io.sockets.emit("send matrix", matrix);
+}
+
+function DeleteTuynuTarax() {
+    tuynutarax = []
+
+    for (var y = 0; y < matrix.length; y++) {
+        for (var x = 0; x < matrix[y].length; x++) {
+            if(matrix[y][x] == 4){
+            matrix[y][x] = 0;
+            }
+        }
+    }
+
+    io.sockets.emit("send matrix", matrix);
+}
 
 function weather() {
     if (weath == "winter") {
@@ -220,6 +287,9 @@ io.on('connection', function (socket) {
     socket.on("add grass", addGrass);
     socket.on("add grassEater", addGrassEater);
     socket.on("add grassEaterEater", addGrassEaterEater);
+    socket.on("delete 5", DeletePahapan);
+    socket.on("delete 4", DeleteTuynuTarax)
+
 
 })
 
@@ -230,6 +300,7 @@ setInterval(function() {
     statistics.grass = grassArr.length;
     statistics.grassEater = grassEaterArr.length;
     statistics.grassEaterEater = grassEaterEaterArr.length;
+    statistics.points = points.length;
     io.sockets.emit("send matrix", statistics);
     fs.writeFile("statistics.json", JSON.stringify(statistics), function(){
         console.log("send");

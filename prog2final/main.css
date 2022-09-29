@@ -27,18 +27,66 @@ tr{
 tr:hover{
     opacity: 1;
 }
+
+
 ul{
+    
     list-style-type:none;
     display: flex;
     flex-direction: row;
-    
+   
+       
 }
-li{
-    margin: 20px;
 
+.buttonss{
+    margin: 50px;
+   
 }
-button:nth-child(1){
-background-color: green;
+button{
 border: none;
 border-radius: 100px;
 }
+
+#KillAll{
+background-color: #acacac;
+}
+#grassButton{
+    background-color: green;
+}
+
+#grassEaterButton{
+    background-color: yellow;
+}
+#grassEaterEaterButton{
+    background-color: red;
+}
+#PahapanButton{
+    background-color:blue;
+}
+#TTButton {
+    background-color: orange;
+}
+
+#stts{
+    font-size: 27px;
+    justify-content: center;
+    background-image: linear-gradient(to right bottom, #F4D03F 0%, #16A085 100%);
+
+}
+#stts > li:nth-child(1){
+   
+background-color: green;
+}
+#stts > li:nth-child(2){
+   
+    background-color: yellow;
+    }
+
+#stts > li:nth-child(3){
+   
+ background-color: red;
+}
+#stts > li:nth-child(4){
+   
+    background-color: magenta;
+   }

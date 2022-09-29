@@ -21,6 +21,8 @@ socket.on("sending statistics",function (stats) {
     document.getElementById("grass").innerHTML = stats.grass;
     document.getElementById("grassEater").innerHTML = stats.grassEater;
     document.getElementById("grassEaterEater").innerHTML = stats.grassEaterEater;
+    document.getElementById("points").innerHTML = stats.points;
+
 
     
 }),300);
@@ -89,6 +91,20 @@ function nkarel(matrix) {
                       fill("cyan");
                   }
             }
+            else if (matrix[y][x] == 6) {
+                if(weath == "summer") {
+                    fill("magenta");
+                  }else if (weath == "autumn") {
+                      fill("#FF59FF");
+                  }else if (weath == "winter") {
+                      fill("#FF94FF");
+                  }else if (weath == "spring") {
+                      fill("#3C8F2E");
+                  }
+            }
+            else if (matrix[y][x] == 7) {
+               fill("#F4007E");
+            }
             rect(x * side, y * side, side, side);
 
         }
@@ -113,4 +129,10 @@ function addGrassEater() {
 function addGrassEaterEater() {
     socket.emit("add grassEaterEater")
 }
+function  DeletePahapan() {
+socket.emit("delete 5")
+}
+function DeleteTuynuTarax(){
+socket.emit("delete 4")
 
+}

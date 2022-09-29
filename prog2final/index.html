@@ -10,6 +10,8 @@
 </head>
 
 <body>
+
+
     <table class="table table-hover">
         <thead>
             <tr>
@@ -55,30 +57,40 @@
             </tr>
         </tbody>
     </table>
-      
-    <span id = "grass" id></span>
-    <span id="grassEater"></span>
-    <span id = "grassEaterEater"></span>
+
 
     <div class="tools">
-        <ul>
-            <li>
-                <button onclick="kill()">Kill them all</button>
+        <ul id="btns">
+            <li class="buttonss">
+                <button onclick="kill()" id="KillAll">Սպանել բոլորին</button>
             </li>
-            <li>
-                <button onclick="addGrass()">Add grass</button>
+            <li class="buttonss">
+                <button onclick="addGrass()" id = "grassButton" >Ավելացնել Խոտ</button>
             </li>
-            <li>
-                <button onclick="addGrassEater()">Add grass eater</button>
+            <li class="buttonss">
+                <button onclick="addGrassEater()" id = "grassEaterButton">Ավելացնել խոտակեր</button>
             </li>
-            <li>
-                <button onclick="addGrassEaterEater()">Add grass eater eater</button>
+            <li class="buttonss">
+                <button onclick="addGrassEaterEater()" id = "grassEaterEaterButton">Ավելացնել ամենակեր</button>
+            </li>
+            <li class="buttonss">
+                <button onclick="DeletePahapan()" id = "PahapanButton" >Սպանել պահապանին</button>
+            </li>
+            <li class="buttonss">
+                <button onclick="DeleteTuynuTarax()" id = "TTButton">Սպանել Ռոբինին</button>
             </li>
         </ul>
     </div>
+<br>
+<div class = "table">
+ <ul id = "stts">
+    <li id = "grass"></li>
+    <li id="grassEater"></li>
+    <li id = "grassEaterEater"></li>
+    <li id = "points"></li>
 
-
-                                                                                                                                                                                                       
+</ul>
+</div>                                                                                                                                                                                                 
 
 
 
