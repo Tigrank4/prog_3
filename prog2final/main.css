@@ -27,3 +27,18 @@ tr{
 tr:hover{
     opacity: 1;
 }
+ul{
+    list-style-type:none;
+    display: flex;
+    flex-direction: row;
+    
+}
+li{
+    margin: 20px;
+
+}
+button:nth-child(1){
+background-color: green;
+border: none;
+border-radius: 100px;
+}

@@ -16,6 +16,15 @@ socket.on("weather", function (data) {
     weath = data;
 })
 
+ setInterval(
+socket.on("sending statistics",function (stats) {
+    document.getElementById("grass").innerHTML = stats.grass;
+    document.getElementById("grassEater").innerHTML = stats.grassEater;
+    document.getElementById("grassEaterEater").innerHTML = stats.grassEaterEater;
+
+    
+}),300);
+
 function nkarel(matrix) {
 
     for (var y = 0; y < matrix.length; y++) {
@@ -91,4 +100,17 @@ setInterval(
     socket.on('send matrix', nkarel)
     },1000
 )
+
+function kill() {
+    socket.emit("kill")
+}
+function addGrass() {
+    socket.emit("add grass")
+}
+function addGrassEater() {
+    socket.emit("add grassEater")
+}
+function addGrassEaterEater() {
+    socket.emit("add grassEaterEater")
+}
 

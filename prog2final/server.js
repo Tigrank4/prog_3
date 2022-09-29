@@ -7,9 +7,15 @@ var fs = require("fs");
 
 app.use(express.static("."));
 
+
+app.get('/start', function (req, res) {
+    res.redirect('start.html');
+});
+
 app.get('/', function (req, res) {
     res.redirect('index.html');
 });
+
 const PORT = 3000;
 server.listen(PORT, () => {
     console.log('connected');
@@ -141,6 +147,55 @@ function game(){
 
 setInterval(game, 1000)
 
+function kill() {
+    grassArr = [];
+    grassEaterArr = []
+    for (var y = 0; y < matrix.length; y++) {
+        for (var x = 0; x < matrix[y].length; x++) {
+            matrix[y][x] = 0;
+        }
+    }
+    io.sockets.emit("send matrix", matrix);
+}
+
+
+function addGrass() {
+    for (var i = 0; i < 10; i++) {
+    var x = Math.floor(Math.random() * matrix[0].length)
+    var y = Math.floor(Math.random() * matrix.length)
+        if (matrix[y][x] == 0) {
+            matrix[y][x] = 1
+            var gr = new Grass(x, y, 1)
+            grassArr.push(gr)
+        }
+    }
+    io.sockets.emit("send matrix", matrix);
+}
+function addGrassEater() {
+    for (var i = 0; i < 5; i++) {   
+    var x = Math.floor(Math.random() * matrix[0].length)
+    var y = Math.floor(Math.random() * matrix.length)
+        if (matrix[y][x] == 0) {
+            matrix[y][x] = 2
+            grassEaterArr.push(new GrassEater(x, y, 2))
+        }
+    }
+    io.sockets.emit("send matrix", matrix);
+}
+
+function addGrassEaterEater() {
+    for (var i = 0; i < 3; i++) {   
+    var x = Math.floor(Math.random() * matrix[0].length)
+    var y = Math.floor(Math.random() * matrix.length)
+        if (matrix[y][x] == 0) {
+            matrix[y][x] = 3
+            grassEaterEaterArr.push(new GrassEaterEater(x,y))
+        }
+    }
+    io.sockets.emit("send matrix", matrix);
+}
+
+
 function weather() {
     if (weath == "winter") {
         weath = "spring"
@@ -159,8 +214,13 @@ function weather() {
 setInterval(weather, 5000);
 
 
-io.on('connection', function () {
-    createObject(matrix)
+io.on('connection', function (socket) {
+    createObject(matrix);
+    socket.on("kill", kill);
+    socket.on("add grass", addGrass);
+    socket.on("add grassEater", addGrassEater);
+    socket.on("add grassEaterEater", addGrassEaterEater);
+
 })
 
 
@@ -172,9 +232,14 @@ setInterval(function() {
     statistics.grassEaterEater = grassEaterEaterArr.length;
     io.sockets.emit("send matrix", statistics);
     fs.writeFile("statistics.json", JSON.stringify(statistics), function(){
-        console.log("send")
+        console.log("send");
+        io.sockets.emit("sending statistics", statistics)
+
     })
 },300)
+
+
+
 
 
 
