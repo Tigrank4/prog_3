@@ -26,7 +26,7 @@ tuynutarax = [];
 pahapan = [];
  matrix = [];
 
-
+weath = "winter";
 Grass = require("./Grass")
 GrassEater = require("./GrassEater")
 GrassEaterEater = require("./GrassEaterEater")
@@ -68,7 +68,7 @@ function matrixGenerator(matrixSize, grassCount, grassEaterCount, grassEaterEate
         matrix[y][x] = 5;
     }
 }
- matrixGenerator(20, 50, 5, 5, 1, 1)
+ matrixGenerator(20, 50, 15, 15, 1, 1)
 
 
 io.sockets.emit('send matrix', matrix)
@@ -82,35 +82,27 @@ function createObject(matrix) {
         for (var x = 0; x < matrix[y].length; x++) {
             if (matrix[y][x] == 1) {
                 matrix[y][x] = 1;
-                let gr = new Grass(x, y);
-                grassArr.push(gr);
+                grassArr.push(new Grass(x, y));
             }
             else if (matrix[y][x] == 2) {
                 matrix[y][x] = 2;
-                let great = new GrassEater(x, y);
-                grassEaterArr.push(great);
+              
+                grassEaterArr.push(new GrassEater(x, y));
             }
             else if (matrix[y][x] == 3) {
                 matrix[y][x] == 3
-                let greateat = new GrassEaterEater(x, y);
-                grassEaterEaterArr.push(greateat);
+                
+                grassEaterEaterArr.push(new GrassEaterEater(x, y));
             }
 
-        if (tuynutarax.length == 0) {
-             if (matrix[y][x] == 4) {
-                 let tr = new TuynuTarax(x, y);
-                tuynutarax.push(tr);
-                
-            }
+        
+            else if (matrix[y][x] == 4) {
+
+                tuynutarax.push(new TuynuTarax(x, y));
                 }
-           if (pahapan.length == 0) {    
-             if (matrix[y][x] == 5) {
-                let trer = new Pahapan(x, y);
-                pahapan.push(trer); 
-                  
-                
-                }
-                
+          
+             else if (matrix[y][x] == 5) {  
+                pahapan.push(new Pahapan(x, y)); 
             }
         }
     }
@@ -149,11 +141,40 @@ function game(){
 
 setInterval(game, 1000)
 
+function weather() {
+    if (weath == "winter") {
+        weath = "spring"
+    }
+    else if (weath == "spring") {
+        weath = "summer"
+    }
+    else if (weath == "summer") {
+        weath = "autumn"
+    }
+    else if (weath == "autumn") {
+        weath = "winter"
+    }
+    io.sockets.emit('weather', weath)
+}
+setInterval(weather, 5000);
+
 
 io.on('connection', function () {
     createObject(matrix)
 })
 
+
+var statistics = {};
+
+setInterval(function() {
+    statistics.grass = grassArr.length;
+    statistics.grassEater = grassEaterArr.length;
+    statistics.grassEaterEater = grassEaterEaterArr.length;
+    io.sockets.emit("send matrix", statistics);
+    fs.writeFile("statistics.json", JSON.stringify(statistics), function(){
+        console.log("send")
+    })
+},300)
 
 
 

@@ -5,30 +5,14 @@ module.exports = class TuynuTarax extends LivingCreature{
         super(x, y);
          this.energy = 20;
              this.directions = [
-                [this.x - 2, this.y - 2],
-                [this.x - 1, this.y - 2],
-                [this.x, this.y - 2],
-                [this.x + 1, this.y - 2],
-                [this.x + 2, this.y - 2],
-                [this.x - 2, this.y - 1],
                 [this.x - 1, this.y - 1],
                 [this.x, this.y - 1],
                 [this.x + 1, this.y - 1],
-                [this.x + 2, this.y - 1],
-                [this.x - 2, this.y],
                 [this.x - 1, this.y],
                 [this.x + 1, this.y],
-                [this.x + 2, this.y],
-                [this.x - 2, this.y + 1],
                 [this.x - 1, this.y + 1],
                 [this.x, this.y + 1],
-                [this.x + 1, this.y + 1],
-                [this.x + 2, this.y + 1],
-                [this.x - 2, this.y + 2],
-                [this.x - 1, this.y + 2],
-                [this.x, this.y + 2],
-                [this.x + 1, this.y + 2],
-                [this.x + 2, this.y + 2]
+                [this.x + 1, this.y + 1]
             ];
         
      }
@@ -103,7 +87,7 @@ module.exports = class TuynuTarax extends LivingCreature{
             let x = exact[0];
             let y = exact[1];
 
-            matrix[y][x] = 5
+            matrix[y][x] = 4
             matrix[this.y][this.x] = 0
 
             this.x = x;

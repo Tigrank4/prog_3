@@ -6,30 +6,14 @@ module.exports = class GrassEaterEater extends LivingCreature {
         this.energy = 20;
       
             this.directions = [
-                [this.x - 2, this.y - 2],
-                [this.x - 1, this.y - 2],
-                [this.x, this.y - 2],
-                [this.x + 1, this.y - 2],
-                [this.x + 2, this.y - 2],
-                [this.x - 2, this.y - 1],
                 [this.x - 1, this.y - 1],
                 [this.x, this.y - 1],
                 [this.x + 1, this.y - 1],
-                [this.x + 2, this.y - 1],
-                [this.x - 2, this.y],
                 [this.x - 1, this.y],
                 [this.x + 1, this.y],
-                [this.x + 2, this.y],
-                [this.x - 2, this.y + 1],
                 [this.x - 1, this.y + 1],
                 [this.x, this.y + 1],
-                [this.x + 1, this.y + 1],
-                [this.x + 2, this.y + 1],
-                [this.x - 2, this.y + 2],
-                [this.x - 1, this.y + 2],
-                [this.x, this.y + 2],
-                [this.x + 1, this.y + 2],
-                [this.x + 2, this.y + 2]
+                [this.x + 1, this.y + 1]
             ];
         
     }
@@ -61,7 +45,7 @@ module.exports = class GrassEaterEater extends LivingCreature {
         let found =this.chooseCell(0);
         let exact = found[Math.floor(Math.random() * found.length)]
 
-        if (exact && this.energy > 8) {
+        if (exact && this.energy > 35) {
             let x = exact[0];
             let y = exact[1];
 
