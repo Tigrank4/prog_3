@@ -21,7 +21,6 @@ socket.on("sending statistics",function (stats) {
     document.getElementById("grass").innerHTML = stats.grass;
     document.getElementById("grassEater").innerHTML = stats.grassEater;
     document.getElementById("grassEaterEater").innerHTML = stats.grassEaterEater;
-    document.getElementById("points").innerHTML = stats.points;
 
 
     
@@ -48,7 +47,7 @@ function nkarel(matrix) {
             }
             else if (matrix[y][x] == 2) {
                 if(weath == "summer") {
-                    fill("#82FF00");
+                    fill("lime");
                   }else if (weath == "autumn") {
                       fill("#FFE95A");
                   }else if (weath == "winter") {
@@ -92,17 +91,6 @@ function nkarel(matrix) {
                   }
             }
             else if (matrix[y][x] == 6) {
-                if(weath == "summer") {
-                    fill("magenta");
-                  }else if (weath == "autumn") {
-                      fill("#FF59FF");
-                  }else if (weath == "winter") {
-                      fill("#FF94FF");
-                  }else if (weath == "spring") {
-                      fill("#3C8F2E");
-                  }
-            }
-            else if (matrix[y][x] == 7) {
                fill("#F4007E");
             }
             rect(x * side, y * side, side, side);
@@ -114,8 +102,7 @@ function nkarel(matrix) {
 setInterval(
     function () {
     socket.on('send matrix', nkarel)
-    },1000
-)
+    },500)
 
 function kill() {
     socket.emit("kill")

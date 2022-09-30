@@ -21,7 +21,6 @@ module.exports = class GrassEaterEater extends LivingCreature {
 
 
     chooseCell(char, char1,char2){
-       
           let result = [];
 
           for (let i = 0; i < this.directions.length; i++) {
@@ -45,7 +44,7 @@ module.exports = class GrassEaterEater extends LivingCreature {
         let found =this.chooseCell(0);
         let exact = found[Math.floor(Math.random() * found.length)]
 
-        if (exact && this.energy > 25) {
+        if (exact && this.energy > 35) {
             let x = exact[0];
             let y = exact[1];
 
