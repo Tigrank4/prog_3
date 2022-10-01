@@ -3,6 +3,9 @@ var socket = io();
 
 
 
+
+
+
 var side = 20;
 function setup() {
    
@@ -25,6 +28,12 @@ socket.on("sending statistics",function (stats) {
 
     
 }),300);
+
+setInterval(socket.on("sending kills",function () {
+    if (kills.length == 30) {
+        kill()
+    }
+}),1000)
 
 function nkarel(matrix) {
 

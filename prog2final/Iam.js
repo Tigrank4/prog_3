@@ -150,7 +150,7 @@ module.exports = class Iam extends LivingCreature {
       }
    
     eat(){
-        let found =this.chooseCell(1,2);
+        let found =this.chooseCell(2,3);
         let exact = found[Math.floor(Math.random() * found.length)]
 
         if (exact){
@@ -159,15 +159,24 @@ module.exports = class Iam extends LivingCreature {
             let y = exact[1];
 
             for (let i = 0; i < grassEaterEaterArr.length; i++) {
-                if( grassArr[i].x == x && grassArr[i].y == y ){
+                if( grassEaterEaterArr[i].x == x && grassEaterEaterArr[i].y == y ){
+                    kills.push(1)
                     grassEaterEaterArr.splice(i, 1)
                 }
             }
             for (let i = 0; i < grassEaterArr.length; i++) {
                 if( grassEaterArr[i].x == x && grassEaterArr[i].y == y ){
                     grassEaterArr.splice(i, 1)
+                    kills.push(1)
                 }
             }
+            for (let i = 0; i < grassArr.length; i++) {
+                if( grassArr[i].x == x && grassArr[i].y == y ){
+                    grassArr.splice(i, 1)
+                    kills.push(1)
+                }
+            }
+          
            
 
             matrix[y][x] = 6;
@@ -182,7 +191,7 @@ module.exports = class Iam extends LivingCreature {
         }
     }
     move(){
-        let found =this.chooseCell(0);
+        let found =this.chooseCell(0,1);
         let exact = found[Math.floor(Math.random() * found.length)]
 
         if (exact){

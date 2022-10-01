@@ -31,7 +31,8 @@ grassEaterArr = [];
 grassEaterEaterArr = [];
 tuynutarax = [];
 pahapan = [];
-iam = [];
+iamArr = [];
+kills = [];
  matrix = [];
 
 
@@ -85,7 +86,7 @@ function matrixGenerator(matrixSize, grassCount, grassEaterCount, grassEaterEate
         matrix[y][x] = 6;
     }
 }
- matrixGenerator(20,30,10,10,1,1,1);
+ matrixGenerator(30,20,15,15,1,1,1);
 
 
 io.sockets.emit('send matrix', matrix)
@@ -122,7 +123,7 @@ function createObject(matrix) {
                 pahapan.push(new Pahapan(x, y)); 
             }
             else if (matrix[y][x] == 6) {  
-                iam.push(new Iam(x, y)); 
+                iamArr.push(new Iam(x, y)); 
             }
         }
     }
@@ -157,8 +158,8 @@ function game(){
         
     }
     
-    for(let i in iam){
-        iam[i].eat;
+    for(let i in iamArr){
+        iamArr[i].eat();
     }
     
     io.sockets.emit("send matrix", matrix);
@@ -172,7 +173,7 @@ function kill() {
     grassEaterEaterArr = [];
     pahapan = [];
     tuynutarax = [];
-    iam = []
+    iamArr = []
 
     
    
@@ -271,6 +272,7 @@ function weather() {
 }
 setInterval(weather, 5000);
 
+io.sockets.emit("sending kills",kills);
 
 io.on('connection', function (socket) {
     createObject(matrix);
