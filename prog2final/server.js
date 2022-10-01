@@ -84,7 +84,7 @@ function matrixGenerator(matrixSize, grassCount, grassEaterCount, grassEaterEate
         matrix[y][x] = 6;
     }
 }
- matrixGenerator(30,0,15,0,0,0,60);
+ matrixGenerator(20,30,15,15,1,1,60);
 
 
 io.sockets.emit('send matrix', matrix)
@@ -255,6 +255,18 @@ function DeleteTuynuTarax() {
 
     io.sockets.emit("send matrix", matrix);
 }
+function AddToxic() {
+    for (var i = 0; i < 3; i++) {   
+    var x = Math.floor(Math.random() * matrix[0].length)
+    var y = Math.floor(Math.random() * matrix.length)
+        if (matrix[y][x] == 0) {
+            matrix[y][x] = 6
+            toxicArr.push(new Toxic(x,y))
+        }
+    }
+    io.sockets.emit("send matrix", matrix);
+}
+
 
 function weather() {
     if (weath == "winter") {
@@ -283,6 +295,8 @@ io.on('connection', function (socket) {
     socket.on("add grassEaterEater", addGrassEaterEater);
     socket.on("delete 5", DeletePahapan);
     socket.on("delete 4", DeleteTuynuTarax)
+    socket.on("add 6", AddToxic)
+
 
 
 })
@@ -294,6 +308,8 @@ setInterval(function() {
     statistics.grass = grassArr.length;
     statistics.grassEater = grassEaterArr.length;
     statistics.grassEaterEater = grassEaterEaterArr.length;
+    statistics.toxic = toxicArr.length;
+
     io.sockets.emit("send matrix", statistics);
     fs.writeFile("statistics.json", JSON.stringify(statistics), function(){
         console.log("send");

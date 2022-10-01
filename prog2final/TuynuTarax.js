@@ -36,7 +36,26 @@ module.exports = class TuynuTarax extends LivingCreature{
 
 
 
+
       }
+
+      mul() {
+        let found =this.chooseCell(0);
+        let exact = found[Math.floor(Math.random() * found.length)]
+
+        if (exact && this.energy > 100) {
+            let x = exact[0];
+            let y = exact[1];
+
+            let eater = new TuynuTarax(x, y);
+            matrix[y][x] = 3;
+            toxicArr.push(eater);
+
+            this.energy = 20;
+        } else {
+            console.error('there is no way to multiply');
+        }
+    }
     eat(){
         let found =this.chooseCell(5,3,2,1,6);
         let exact = found[Math.floor(Math.random() * found.length)]
@@ -100,8 +119,15 @@ module.exports = class TuynuTarax extends LivingCreature{
 
             this.x = x;
             this.y = y;
-        }
-        
+
+            
+            if(this.energy <= 0){
+                this.die()
+            }
+        }else {
+            this.energy -= 3;
+            
+            }
     }
     die(){
         for (let i = 0; i < tuynutarax.length; i++) {

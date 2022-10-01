@@ -80,7 +80,7 @@ module.exports = class GrassEaterEater extends LivingCreature {
             for (let i = 0; i < toxicArr.length; i++) {
                 if( toxicArr[i].x == x && toxicArr[i].y == y ){
                     toxicArr.splice(i, 1);
-                    this.die();
+                this.energy -= 10;
 
                 }
             }

@@ -6,17 +6,18 @@ var socket = io();
 
 
 
-var side = 30;
+var side = 20;
 function setup() {
    
 
     frameRate(3);
-    createCanvas(30 * side, 30 * side);
+    createCanvas(20 * side, 20 * side);
     background('#acacac');
 }
 
 socket.on("weather", function (data) {
     weath = data;
+    document.getElementById("weath").innerHTML = weath;
 })
 
  setInterval(
@@ -24,6 +25,8 @@ socket.on("sending statistics",function (stats) {
     document.getElementById("grass").innerHTML = stats.grass;
     document.getElementById("grassEater").innerHTML = stats.grassEater;
     document.getElementById("grassEaterEater").innerHTML = stats.grassEaterEater;
+    document.getElementById("toxic").innerHTML = stats.toxic;
+
 
 
     
@@ -136,3 +139,7 @@ function DeleteTuynuTarax(){
 socket.emit("delete 4")
 
 }
+function AddToxic(){
+    socket.emit("add 6")
+    
+    }

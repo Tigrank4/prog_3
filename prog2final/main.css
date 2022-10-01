@@ -66,6 +66,12 @@ background-color: #acacac;
 #TTButton {
     background-color: orange;
 }
+#toxic{
+    background-color:#3B0863 ;
+}
+#Toxicic{
+    background-color:#3B0863 ;
+}
 
 #stts{
     font-size: 27px;
@@ -90,3 +96,20 @@ background-color: green;
    
     background-color: magenta;
    }
+
+#weath{
+    justify-content: center;
+    text-align: center;
+    margin: auto;
+}
+#weatherr{
+    border: 1px solid white;
+    border-radius: 100px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: auto;
+    width: 100px;
+    height: 50px;
+    background-image: linear-gradient(to right bottom, #F4D03F 0%, #16A085 100%);
+}
