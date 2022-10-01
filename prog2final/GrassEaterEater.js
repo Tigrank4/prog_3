@@ -20,7 +20,7 @@ module.exports = class GrassEaterEater extends LivingCreature {
     
 
 
-    chooseCell(char, char1,char2){
+    chooseCell(char, char1,char2,char3){
           let result = [];
 
           for (let i = 0; i < this.directions.length; i++) {
@@ -28,7 +28,7 @@ module.exports = class GrassEaterEater extends LivingCreature {
               let y = this.directions[i][1];
 
               if ( y < matrix.length && y >= 0 && x < matrix[0].length && x >= 0 ){
-                  if (matrix[y][x] == char || matrix[y][x] == char1 || matrix[y][x] == char2) {
+                  if (matrix[y][x] == char || matrix[y][x] == char1 || matrix[y][x] == char2 ) {
                       result.push(this.directions[i]);
                   }
               }
@@ -58,7 +58,7 @@ module.exports = class GrassEaterEater extends LivingCreature {
         }
     }
     eat(){
-        let found =this.chooseCell(1,2,4);
+        let found =this.chooseCell(1,2,6);
         let exact = found[Math.floor(Math.random() * found.length)]
 
         if (exact){
@@ -77,6 +77,13 @@ module.exports = class GrassEaterEater extends LivingCreature {
                 }
             }
            
+            for (let i = 0; i < toxicArr.length; i++) {
+                if( toxicArr[i].x == x && toxicArr[i].y == y ){
+                    toxicArr.splice(i, 1);
+                    this.die();
+
+                }
+            }
 
             matrix[y][x] = 3;
             matrix[this.y][this.x] = 0

@@ -6,12 +6,12 @@ var socket = io();
 
 
 
-var side = 20;
+var side = 30;
 function setup() {
    
 
     frameRate(3);
-    createCanvas(20 * side, 20 * side);
+    createCanvas(30 * side, 30 * side);
     background('#acacac');
 }
 
@@ -29,11 +29,7 @@ socket.on("sending statistics",function (stats) {
     
 }),300);
 
-setInterval(socket.on("sending kills",function () {
-    if (kills.length == 30) {
-        kill()
-    }
-}),1000)
+
 
 function nkarel(matrix) {
 
@@ -100,7 +96,15 @@ function nkarel(matrix) {
                   }
             }
             else if (matrix[y][x] == 6) {
-               fill("#F4007E");
+                if(weath == "summer") {
+                    fill("#7DA121");
+                  }else if (weath == "autumn") {
+                      fill("#A10028");
+                  }else if (weath == "winter") {
+                      fill("#63631F");
+                  }else if (weath == "spring") {
+                      fill("#3B0863");
+                  };
             }
             rect(x * side, y * side, side, side);
 

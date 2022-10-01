@@ -17,7 +17,7 @@ module.exports = class TuynuTarax extends LivingCreature{
         
      }
   
-     chooseCell(char, char1,char2,char3){
+     chooseCell(char, char1,char2,char3,char4){
         
           let result = [];
 
@@ -26,7 +26,7 @@ module.exports = class TuynuTarax extends LivingCreature{
               let y = this.directions[i][1];
 
               if ( y < matrix.length && y >= 0 && x < matrix[0].length && x >= 0 ){
-                  if (matrix[y][x] == char || matrix[y][x] == char1 || matrix[y][x] == char2 || matrix[y][x] == char3) {
+                  if (matrix[y][x] == char || matrix[y][x] == char1 || matrix[y][x] == char2 || matrix[y][x] == char3 || matrix[y][x] == char4) {
                       result.push(this.directions[i]);
                   }
               }
@@ -38,7 +38,7 @@ module.exports = class TuynuTarax extends LivingCreature{
 
       }
     eat(){
-        let found =this.chooseCell(5,3,2,1);
+        let found =this.chooseCell(5,3,2,1,6);
         let exact = found[Math.floor(Math.random() * found.length)]
 
         if (exact){
@@ -65,6 +65,14 @@ module.exports = class TuynuTarax extends LivingCreature{
             for (let i = 0; i < pahapan.length; i++) {
                 if( pahapan[i].x == x && pahapan[i].y == y ){
                     pahapan.splice(i, 1)
+                }
+            }
+
+            for (let i = 0; i < toxicArr.length; i++) {
+                if( toxicArr[i].x == x && toxicArr[i].y == y ){
+                    toxicArr.splice(i, 1);
+                    this.energy +=10;
+
                 }
             }
 
@@ -95,7 +103,14 @@ module.exports = class TuynuTarax extends LivingCreature{
         }
         
     }
-
+    die(){
+        for (let i = 0; i < tuynutarax.length; i++) {
+            if( tuynutarax[i].x == this.x && tuynutarax[i].y == this.y ){
+                tuynutarax.splice(i, 1)
+            }
+        }
+        matrix[this.y][this.x] = 0
+    }
 
 
 

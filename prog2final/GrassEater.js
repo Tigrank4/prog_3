@@ -19,9 +19,30 @@ module.exports = class GrassEater extends LivingCreature {
             [this.x + 1, this.y + 1]
         ];
     }
+
+    chooseCell(char, char1){
+        let result = [];
+
+        for (let i = 0; i < this.directions.length; i++) {
+            let x = this.directions[i][0];
+            let y = this.directions[i][1];
+
+            if ( y < matrix.length && y >= 0 && x < matrix[0].length && x >= 0 ){
+                if (matrix[y][x] == char || matrix[y][x] == char1) {
+                    result.push(this.directions[i]);
+                }
+            }
+
+        }
+      return result;
+
+
+
+    }
+    
     
     mul() {
-        let found = super.chooseCell(0);
+        let found = this.chooseCell(0);
         let exact = found[Math.floor(Math.random() * found.length)]
 
         if (exact && this.energy > 30) {
@@ -38,7 +59,7 @@ module.exports = class GrassEater extends LivingCreature {
         }
     }
     eat(){
-        let found =super.chooseCell(1);
+        let found =this.chooseCell(1,6);
         let exact = found[Math.floor(Math.random() * found.length)]
 
         if (exact){
@@ -52,7 +73,13 @@ module.exports = class GrassEater extends LivingCreature {
                 }
             }
 
-           
+            for (let i = 0; i < toxicArr.length; i++) {
+                if( toxicArr[i].x == x && toxicArr[i].y == y ){
+                    toxicArr.splice(i, 1);
+                    this.die();
+
+                }
+            }
 
             matrix[y][x] = 2
             matrix[this.y][this.x] = 0

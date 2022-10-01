@@ -31,8 +31,7 @@ grassEaterArr = [];
 grassEaterEaterArr = [];
 tuynutarax = [];
 pahapan = [];
-iamArr = [];
-kills = [];
+toxicArr = [];
  matrix = [];
 
 
@@ -43,10 +42,9 @@ GrassEater = require("./GrassEater")
 GrassEaterEater = require("./GrassEaterEater")
 TuynuTarax = require("./TuynuTarax")
  Pahapan = require("./Pahapan")
- Iam = require('./Iam');
+Toxic = require("./Toxic")
 
-
-function matrixGenerator(matrixSize, grassCount, grassEaterCount, grassEaterEaterCount, pahapanCount, tuynutaraxCount,iamCount) {
+function matrixGenerator(matrixSize, grassCount, grassEaterCount, grassEaterEaterCount, pahapanCount, tuynutaraxCount,toxicCount) {
     
 
     for (let i = 0; i < matrixSize; i++) {
@@ -80,13 +78,13 @@ function matrixGenerator(matrixSize, grassCount, grassEaterCount, grassEaterEate
         let y = Math.floor(Math.random() * matrixSize);
         matrix[y][x] = 5;
     }
-    for (let i = 0; i < iamCount; i++) {
+    for (let i = 0; i < toxicCount; i++) {
         let x = Math.floor(Math.random() * matrixSize);
         let y = Math.floor(Math.random() * matrixSize);
         matrix[y][x] = 6;
     }
 }
- matrixGenerator(30,20,15,15,1,1,1);
+ matrixGenerator(30,0,15,0,0,0,60);
 
 
 io.sockets.emit('send matrix', matrix)
@@ -123,7 +121,7 @@ function createObject(matrix) {
                 pahapan.push(new Pahapan(x, y)); 
             }
             else if (matrix[y][x] == 6) {  
-                iamArr.push(new Iam(x, y)); 
+                toxicArr.push(new Toxic(x,y));
             }
         }
     }
@@ -142,11 +140,13 @@ function game(){
         
        
     }
-    for (let i in grassEaterArr) 
+    for (let i in grassEaterArr) {
         grassEaterArr[i].eat();
+    }
     
-    for (let i in grassEaterEaterArr) 
+    for (let i in grassEaterEaterArr){ 
         grassEaterEaterArr[i].eat();
+    }
     
     for (let i in tuynutarax) {
         tuynutarax[i].eat();
@@ -158,9 +158,10 @@ function game(){
         
     }
     
-    for(let i in iamArr){
-        iamArr[i].eat();
-    }
+    // for (let i in toxicArr) {
+        
+    //     toxicArr.[i]
+    // }
     
     io.sockets.emit("send matrix", matrix);
 }
@@ -173,7 +174,7 @@ function kill() {
     grassEaterEaterArr = [];
     pahapan = [];
     tuynutarax = [];
-    iamArr = []
+   toxicArr = []
 
     
    
@@ -272,7 +273,7 @@ function weather() {
 }
 setInterval(weather, 5000);
 
-io.sockets.emit("sending kills",kills);
+
 
 io.on('connection', function (socket) {
     createObject(matrix);
